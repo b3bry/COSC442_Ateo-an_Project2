@@ -13,19 +13,19 @@ package edu.towson.cis.cosc442.project2.vendingmachine;
 public class VendingMachine {
 
 	// The number of slots in the vending machine
-	public static final int NUM_SLOTS = 4;
+	private static final int NUM_SLOTS = 4;
 
 	// The code for the "A" slot
-	public static final String A_CODE = "A";
+	private static final String A_CODE = "A";
 
 	// The code for the "B" slot
-	public static final String B_CODE = "B";
+	private static final String B_CODE = "B";
 	
 	// The code for the "C" slot
-	public static final String C_CODE = "C";
+	private static final String C_CODE = "C";
 	
 	// The code for the "D" slot
-	public static final String D_CODE = "D";
+	private static final String D_CODE = "D";
 	
 	// The initial balance of the vending machine
 	private static final double INITIAL_BALANCE = 0;
