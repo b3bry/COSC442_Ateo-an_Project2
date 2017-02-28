@@ -78,25 +78,89 @@ public class VendingMachineTest {
 		vm.addItem(coke, "C");
 		assertEquals("coke",vm.removeItem("C").getName());
 	}
-
+	
+	/**
+	 * Tests when an empty slot is given
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testRemoveItem_Empty(){
+		vm.removeItem("B");
+	}
+	
+	/**
+	 * Tests when no slot is given
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testRemoveItem_NoSlot(){
+		vm.removeItem("");
+	}
+	
+	/**
+	 * Tests invalid slot
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testRemoveItem_invalidSlot(){
+		vm.removeItem("AA");
+	}
+	
+	
+	
+	/**
+	 * vanilla test case for insert money
+	 * Inserting a valid amount
+	 */
 	@Test
 	public void testInsertMoney() {
-		fail("Not yet implemented");
+		double init_balance = vm.getBalance();
+		vm.insertMoney(0.00);
+		double cur_balance = vm.getBalance();
+		
+		assertEquals(0.00, cur_balance-init_balance,0.00);
+	}
+	
+	/**
+	 * 2nd vanilla test case for insert money
+	 * Inserting a valid amount
+	 */
+	public void testInsertMoney_2ndVanilla(){
+		double init_balance = vm.getBalance();
+		vm.insertMoney(5.00);
+		double cur_balance = vm.getBalance();
+		
+		assertEquals(5.00, cur_balance-init_balance,0.00);
+	}
+	
+	/**
+	 * Tests when a negative amount is given
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testInsertMoney_NegativeAmount(){
+		vm.insertMoney(-0.01);
+	}
+	
+	/**
+	 * Tests when an extremely large amount is given
+	 * 
+	 */
+	@Test
+	public void testInsertMoney_LargeAmount(){
+		double init_balance = vm.getBalance();
+		vm.insertMoney(Double.MAX_VALUE);
+		double cur_balance = vm.getBalance();
+		
+		assertEquals(Double.MAX_VALUE, cur_balance-init_balance,0.00);
 	}
 
 	@Test
 	public void testGetBalance() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testMakePurchase() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testReturnChange() {
-		fail("Not yet implemented");
 	}
 
 }
