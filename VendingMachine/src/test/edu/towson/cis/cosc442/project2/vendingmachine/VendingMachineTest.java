@@ -44,6 +44,7 @@ public class VendingMachineTest {
 	public void testAddItem_SameSlot(){
 		vm.addItem(chips, "A");
 		vm.addItem(coke, "A");
+		
 	}
 	
 	/**
@@ -77,6 +78,20 @@ public class VendingMachineTest {
 	public void testRemoveItem() {
 		vm.addItem(coke, "C");
 		assertEquals("coke",vm.removeItem("C").getName());
+	}
+	
+	/**
+	 * Test postcondition, the item is removed
+	 */
+	@Test
+	public void testRemoveItem_isRemoved() {
+		try{
+			vm.addItem(chips, "D");
+			vm.removeItem("D");
+			vm.addItem(coke, "D"); // throws an exception if the slot is already occupied.
+		}catch(Exception e){
+			fail(e.getMessage());
+		}
 	}
 	
 	/**
