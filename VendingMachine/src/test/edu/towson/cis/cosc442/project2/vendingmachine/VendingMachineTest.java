@@ -150,13 +150,26 @@ public class VendingMachineTest {
 		
 		assertEquals(Double.MAX_VALUE, cur_balance-init_balance,0.00);
 	}
-
+	
+	/**
+	 * vanilla test case for getBalance
+	 * Tests getting balance
+	 */
 	@Test
 	public void testGetBalance() {
+		vm.insertMoney(10.00);
+		assertEquals(10.00,vm.getBalance(),0.00);
 	}
-
+	
+	/**
+	 * vanilla test case for make Purchase
+	 * tests making a purchase
+	 */
 	@Test
 	public void testMakePurchase() {
+		vm.insertMoney(9.99);
+		vm.addItem(coke, "A");
+		assertEquals(true,vm.makePurchase("A"));
 	}
 
 	@Test
