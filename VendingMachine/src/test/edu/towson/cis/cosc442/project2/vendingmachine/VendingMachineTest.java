@@ -162,6 +162,24 @@ public class VendingMachineTest {
 	}
 	
 	/**
+	 * Tests precondition, vending machine should start with 0 balance.
+	 */
+	@Test
+	public void testGetBalance_startBalance(){
+		assertEquals(0.00,vm.getBalance(),0.00);
+	}
+	
+	/**
+	 * Tests postcondition, getBalance does not alter the balance
+	 */
+	@Test
+	public void testGetBalance_noAlterBalance(){
+		vm.insertMoney(10.00);
+		vm.getBalance();
+		assertEquals(10.00,vm.getBalance(),0.00);
+	}
+	
+	/**
 	 * vanilla test case for make Purchase
 	 * tests making a purchase
 	 */
