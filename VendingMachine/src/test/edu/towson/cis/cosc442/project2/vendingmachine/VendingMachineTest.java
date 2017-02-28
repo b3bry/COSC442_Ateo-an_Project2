@@ -186,12 +186,81 @@ public class VendingMachineTest {
 	@Test
 	public void testMakePurchase() {
 		vm.insertMoney(9.99);
-		vm.addItem(coke, "A");
-		assertEquals(true,vm.makePurchase("A"));
+		vm.addItem(chips, "A");
+		assertTrue(vm.makePurchase("A"));
+	}
+	
+	/**
+	 * Test postcondition, the item is purchased is removed
+	 */
+	@Test
+	public void testMakePurchase_isItemRemoved(){
+		vm.insertMoney(9.99);
+		vm.addItem(chips, "A");
+		vm.makePurchase("A");
+		try{
+			vm.addItem(coke, "A");
+		}catch(Exception e){
+			fail(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Test postcondition, the cost of the item is subtracted from the balance
+	 */
+	@Test
+	public void testMakePurchase_costSubtracted(){
+		vm.insertMoney(9.99);
+		vm.addItem(chips, "A");
+		vm.makePurchase("A");
+		assertEquals(0.00,vm.getBalance(),0.00);
+	}
+	
+	/**
+	 * Test when the slot is empty but the balance is sufficient
+	 */
+	@Test
+	public void testMakePurchase_emptySufficient(){
+		vm.insertMoney(9.99);
+		vm.makePurchase("A");
+		assertFalse(vm.makePurchase("A"));
+	}
+	
+	/**
+	 * Test when the slot is filled but the balance is insufficient
+	 */
+	@Test
+	public void testMakePurchase_filledNoSufficient(){
+		vm.addItem(chips, "B");
+		assertFalse(vm.makePurchase("B"));
+	}
+	
+	/**
+	 * Test when the slot is empty and the balance is insufficient
+	 */
+	@Test
+	public void testMakePurchase_emptyNoSufficient(){
+		assertFalse(vm.makePurchase("A"));
 	}
 
+	/**
+	 * vanilla test case for return change
+	 * 
+	 */
 	@Test
 	public void testReturnChange() {
+		vm.insertMoney(9.99);
+		assertEquals(9.99,vm.returnChange(),0.00);
+	}
+	
+	/**
+	 * test postcondition, balance is 0
+	 */
+	@Test
+	public void testReturnChange_afterBalance(){
+		vm.insertMoney(9.99);
+		vm.returnChange();
+		assertEquals(0.00,vm.getBalance(),0.00);
 	}
 
 }
