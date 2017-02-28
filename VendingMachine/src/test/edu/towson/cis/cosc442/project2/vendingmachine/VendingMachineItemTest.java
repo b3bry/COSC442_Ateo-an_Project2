@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.towson.cis.cosc442.project2.vendingmachine.VendingMachineException;
 import edu.towson.cis.cosc442.project2.vendingmachine.VendingMachineItem;
 
 public class VendingMachineItemTest {
@@ -18,7 +19,10 @@ public class VendingMachineItemTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
+	/**
+	 * test constructing a vending machine item with valid arguments does not fail
+	 */
 	@Test
 	public void testVendingMachineItem() {
 		try{
@@ -28,12 +32,26 @@ public class VendingMachineItemTest {
 			fail(e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Test precondition, price >=0
+	 */
+	@Test(expected=VendingMachineException.class)
+	public void testVendingMachineItem_negPrice(){
+		new VendingMachineItem("steak",-0.01);
+	}
+	
+	/**
+	 * Tests getName returns the right name
+	 */
 	@Test
 	public void testGetName() {
 		assertEquals("chips",vi.getName());
 	}
 
+	/**
+	 * Test getPrice returns the right price
+	 */
 	@Test
 	public void testGetPrice() {
 		assertEquals(9.99,vi.getPrice(),0.00);
