@@ -222,8 +222,8 @@ public class VendingMachineTest {
 	@Test
 	public void testMakePurchase_emptySufficient(){
 		vm.insertMoney(9.99);
-		vm.makePurchase("A");
-		assertFalse(vm.makePurchase("A"));
+		vm.makePurchase("D");
+		assertFalse(vm.makePurchase("D"));
 	}
 	
 	/**
